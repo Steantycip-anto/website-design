@@ -4,6 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'steantycip.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'unica-ecommerce.onrender.com',
         pathname: '/uploads/**',
       },

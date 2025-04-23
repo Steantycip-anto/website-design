@@ -8,6 +8,7 @@ import * as HeroComponents from "@/components/heroes";
 import * as Customers from "@/components/customers";
 import * as Expertises from "@/components/expertises";
 import * as Models3D from "@/components/models3d";
+import * as Projects from "@/components/projects";
 import * as Timelines from "@/components/timelines";
 import * as Features from "@/components/features";
 
@@ -17,12 +18,18 @@ const SITE_SECTIONS = [
     type: "header",
     title: "Header",
     components: {
-      "Header": { name: "Header", component: HeadersComponents.Header },
+      "Header1": { name: "Header 1", component: HeadersComponents.FirstHeader },
       "DarkHeader": { name: "Dark Header", component: HeadersComponents.DarkHeader },
       "MinimalHeader": { name: "Minimal Header", component: HeadersComponents.MinimalHeader },
-      "AnimatedHeader": { name: "Animated Header", component: HeadersComponents.AnimatedHeader }
+      "AnimatedHeader": { name: "Animated Header", component: HeadersComponents.AnimatedHeader },
+      "variant-1": { name: "Variant 1", component: HeadersComponents.TechMenuDesign1 },
+      "variant-2": { name: "Variant 2", component: HeadersComponents.TechMenuDesign2 },
+      "variant-3": { name: "Variant 3", component: HeadersComponents.TechMenuDesign3 },
+      "variant-one": { name: "Variant One", component: HeadersComponents.VariantOne },
+      "variant-two": { name: "Variant Two", component: HeadersComponents.VariantTwo },
+      "variant-three": { name: "Variant Three", component: HeadersComponents.VariantThree },
     },
-    defaultActive: "Header"
+    defaultActive: "variant-one"
   },
   {
     type: "hero",
@@ -34,21 +41,12 @@ const SITE_SECTIONS = [
       "hero-variant1": { name: "Variant 1", component: HeroComponents.Variant1 },
       "hero-variant2": { name: "Variant 2", component: HeroComponents.Variant2 },
       "hero-variant3": { name: "Variant 3", component: HeroComponents.Variant3 },
+      "hero-numbers1": { name: "Numbers 1", component: HeroComponents.Numbers1 },
+      "hero-numbers2": { name: "Numbers 2", component: HeroComponents.Numbers2 },
+      "hero-numbers3": { name: "Numbers 3", component: HeroComponents.Numbers3 },
     },
-    defaultActive: "hero-variant1"
+    defaultActive: "hero-numbers1"
   },
-  {
-    type: "customers",
-    title: "Customers",
-    components: {
-      "customers1": { name: "Customers 1", component: Customers.Customers1 },
-      "customers2": { name: "Customers 2", component: Customers.Customers2 },
-      "customers3": { name: "Customers 3", component: Customers.Customers3 },
-      "logo-wall-3D": { name: "Logo Wall 3D", component: Customers.LogoWall3D },
-      "expanding-grid-logos": { name: "Expanding Grid Logos", component: Customers.ExpandingGridLogos },
-    },
-      defaultActive: "customers1"
-    },
   {
     type: "expertise",
     title: "Expertise",
@@ -59,32 +57,62 @@ const SITE_SECTIONS = [
       "expertise-horizontal-timeline1": { name: "Horizontal Timeline 1", component: Expertises.ExpertiseHorizontalTimeline1 },
       "expertise-horizontal-timeline2": { name: "Horizontal Timeline 2", component: Expertises.ExpertiseHorizontalTimeline2 },
     },
-      defaultActive: "expertise1"
-    },
-    {
-      type: "3dModels",
-      title: "3D Models",
-      components: {
+    defaultActive: "expertise1"
+  },
+  {
+    type: "3dModels",
+    title: "3D Models",
+    components: {
       "models1": { name: "Models 1", component: Models3D.Models1 },
-        "models2": { name: "Models 2", component: Models3D.Models2 },
-        "models3": { name: "Models 3", component: Models3D.Models3 },
-        "models4": { name: "Models 4", component: Models3D.Models4 },
-        "models5": { name: "Models 5", component: Models3D.Models5 },
+      "models2": { name: "Models 2", component: Models3D.Models2 },
+      "models3": { name: "Models 3", component: Models3D.Models3 },
+      "models4": { name: "Models 4", component: Models3D.Models4 },
+      "models5": { name: "Models 5", component: Models3D.Models5 },
     },
     defaultActive: "models5"
   },
-    {
-      type: "timeline",
-      title: "Timeline",
-      components: {
-      "timeline1": { name: "Timeline 1", component: Timelines.Timeline1 },
+
+  {
+    type: "customers",
+    title: "Customers",
+    components: {
+      "customers1": { name: "Customers 1", component: Customers.Customers1 },
+      "customers2": { name: "Customers 2", component: Customers.Customers2 },
+      "customers3": { name: "Customers 3", component: Customers.Customers3 },
+      "logo-wall-3D": { name: "Logo Wall 3D", component: Customers.LogoWall3D },
+      "expanding-grid-logos": { name: "Expanding Grid Logos", component: Customers.ExpandingGridLogos },
+      "carousel-variant": { name: "Carousel Variant", component: Customers.CarouselVariant },
+      "grid-variant": { name: "Grid Variant", component: Customers.GridVariant },
+      "tabs-variant": { name: "Tabs Variant", component: Customers.TabsVariant },
+      "grid-carousel-variant": { name: "Grid Carousel Variant", component: Customers.GridCarouselVariant },
     },
-    defaultActive: "timeline1"
+    defaultActive: "tabs-variant"
   },
-    {
-      type: "feature",
-      title: "Feature",
-      components: {
+  {
+    type: "projects",
+    title: "Projects",
+    components: {
+      "projects1": { name: "Projects 1", component: Projects.ProjectsSection1 },
+      "projects2": { name: "Projects 2", component: Projects.ProjectsSection2 },
+      "projects3": { name: "Projects 3", component: Projects.ProjectsSection3 },
+    },
+    defaultActive: "projects2"
+  },
+  {
+    type: "timeline",
+    title: "Timeline",
+    components: {
+      "timeline1": { name: "Timeline 1", component: Timelines.Timeline1 },
+      "vertical-timeline": { name: "Vertical Timeline", component: Timelines.VerticalTimeline },
+      "horizontal-timeline": { name: "Horizontal Timeline", component: Timelines.HorizontalTimeline },
+      "interactive-timeline": { name: "Interactive Timeline", component: Timelines.InteractiveTimeline },
+    },
+    defaultActive: "horizontal-timeline"
+  },
+  {
+    type: "feature",
+    title: "Feature",
+    components: {
       "feature1": { name: "Feature 1", component: Features.Feature1 },
       // Aggiungi un nuovo content component qui
     },
@@ -111,9 +139,8 @@ const SectionSelector = ({ sections, activeId, onChange, title }) => (
         {Object.entries(sections).map(([id, section]) => (
           <div
             key={id}
-            className={`cursor-pointer px-4 py-2 rounded ${
-              activeId === id ? "bg-red-600" : "hover:bg-gray-700"
-            }`}
+            className={`cursor-pointer px-4 py-2 rounded ${activeId === id ? "bg-red-600" : "hover:bg-gray-700"
+              }`}
             onClick={() => onChange(id)}
           >
             {section.name}
@@ -141,11 +168,14 @@ export default function Page() {
     }));
   };
 
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
+  
   return (
-    <div className="min-h-screen bg-gray-50">
-      <input id="show" type="checkbox" checked={show} onChange={() => setShow(!show)} />
-      <label htmlFor="show">Show Options selectior</label>
+    <div className="min-h-screen bg-gray-50 relative">
+      <div className="absolute top-1 left-1">
+        <input id="show" type="checkbox" checked={show} onChange={() => setShow(!show)} />
+        <label htmlFor="show" className="opacity-30">Show Options selectior</label>
+      </div>
       {/* Render dinamico di tutte le sezioni configurate */}
       {SITE_SECTIONS.map((sectionConfig) => {
         const activeId = activeSections[sectionConfig.type];

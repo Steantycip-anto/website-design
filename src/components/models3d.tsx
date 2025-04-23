@@ -81,7 +81,7 @@ const ModelViewer = ({ selectedModel, isInfoOpen, setIsInfoOpen, maxHeight = fal
   const [loaded, setLoaded] = useState(false);
   const cameraRef = useRef();
 
-  return <div className={"bg-gray-900 rounded-lg overflow-hidden relative " + (maxHeight ? "h-96 md:max-h-[500px]" : "h-96 md:h-[500px]")}>
+  return <div className={"bg-gray-900 rounded-lg overflow-hidden relative " + (maxHeight ? "h-full" : "h-96 md:h-[500px]")}>
     <Canvas className="h-full w-full">
       <Env setLoaded={setLoaded} />
       {loaded && <Model modelPath={selectedModel.modelPath} />}
@@ -106,7 +106,7 @@ const ModelViewer = ({ selectedModel, isInfoOpen, setIsInfoOpen, maxHeight = fal
     {/* Info panel */}
     <div
       className={`
-        absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 backdrop-blur-sm
+        absolute z-[15] bottom-0 left-0 right-0 bg-black bg-opacity-80 backdrop-blur-sm
         transition-all duration-300 transform p-6
         ${isInfoOpen ? 'translate-y-0' : 'translate-y-full'}
       `}
@@ -389,71 +389,99 @@ export function Models5() {
             </h3>
             <div className="max-w-6xl mx-auto p-4 bg-gray-950 text-white rounded-md">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {Object.keys(categories).map(cat => (
-                  <div key={cat} className="border-b border-gray-700 pb-6">
-                    <h3 className="text-xl font-bold mb-4 text-gray-200">{categories[cat].name}</h3>
+                {Object.keys(categories)
+                  .slice(0, 4)
+                  .reduce((result, item, index, array) =>
+                    index % 2 === 0
+                      ? [...result, [item, array[index + 1]].filter(Boolean)]
+                      : result,
+                    []
+                  )
+                  .map(c => (
+                    <div>
+                      {c.map(cat => (
+                        <div key={cat} className="border-b border-gray-700 pb-6">
+                          <h3 className="text-xl font-bold mb-4 text-gray-200">{categories[cat].name}</h3>
 
-                    <div className="relative">
-                      {/* Horizontal scrollable container */}
-                      <div className="flex overflow-x-auto scrollbar-hide gap-3 pb-2 snap-x">
-                        {/* First 4 model thumbnails */}
-                        {Array.from({ length: Math.min(4, categories[cat].num) }).map((_, i) => (
-                          <div
-                            key={`model-${i}`}
-                            className={`
+                          <div className="relative">
+                            {/* Horizontal scrollable container */}
+                            <div className="flex overflow-x-auto scrollbar-hide gap-3 pb-2 snap-x">
+                              {/* First 4 model thumbnails */}
+                              {Array.from({ length: Math.min(4, categories[cat].num) }).map((_, i) => (
+                                <div
+                                  key={`model-${i}`}
+                                  className={`
                       flex-shrink-0 w-24 snap-start
                       cursor-pointer
                       border-2 ${selectedModel.id === models[i]?.id ? 'border-white' : 'border-gray-800'}
                       rounded-xl overflow-hidden relative group
                       transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-red-900/20
                     `}
-                            onClick={() => {
-                              setSelectedModel(models[i] || {});
-                              setIsInfoOpen(false);
-                            }}
-                          >
-                            <img
-                              src={models[i]?.thumbnail || "/api/placeholder/200/200"}
-                              alt={models[i]?.title || `Model ${i + 1}`}
-                              className="w-full aspect-square object-cover"
-                            />
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2">
-                              <p className="text-sm font-medium truncate">{models[i]?.title || `Model ${i + 1}`}</p>
-                            </div>
-                          </div>
-                        ))}
+                                  onClick={() => {
+                                    setSelectedModel(models[i] || {});
+                                    setIsInfoOpen(false);
+                                  }}
+                                >
+                                  <img
+                                    src={models[i]?.thumbnail || "/api/placeholder/200/200"}
+                                    alt={models[i]?.title || `Model ${i + 1}`}
+                                    className="w-full aspect-square object-cover"
+                                  />
+                                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2">
+                                    <p className="text-sm font-medium truncate">{models[i]?.title || `Model ${i + 1}`}</p>
+                                  </div>
+                                </div>
+                              ))}
 
-                        {/* "+n" thumbnail if there are more than 4 models */}
-                        {categories[cat].num > 4 && (
-                          <div className="flex-shrink-0 w-24 snap-start cursor-pointer rounded-lg overflow-hidden relative bg-gray-800 border-2 border-gray-700 flex items-center justify-center hover:bg-gray-700 transition-colors duration-200">
-                            <div className="flex flex-col items-center justify-center h-full w-full aspect-square">
-                              <span className="text-3xl font-bold text-red-500">+{categories[cat].num - 4}</span>
-                              <span className="text-xs text-gray-300 mt-1">more</span>
+                              {/* "+n" thumbnail if there are more than 4 models */}
+                              {categories[cat].num > 4 && (
+                                <div className="flex-shrink-0 w-24 snap-start cursor-pointer rounded-lg overflow-hidden relative bg-gray-800 border-2 border-gray-700 flex items-center justify-center hover:bg-gray-700 transition-colors duration-200">
+                                  <div className="flex flex-col items-center justify-center h-full w-full aspect-square">
+                                    <span className="text-3xl font-bold text-red-500">+{categories[cat].num - 4}</span>
+                                    <span className="text-xs text-gray-300 mt-1">more</span>
+                                  </div>
+                                </div>
+                              )}
                             </div>
-                          </div>
-                        )}
-                      </div>
 
-                      {/* Gradient fade indicators for scroll */}
-                      <div className="absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-gray-900 to-transparent pointer-events-none"></div>
+                            {/* Gradient fade indicators for scroll */}
+                            <div className="absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-gray-900 to-transparent pointer-events-none"></div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  </div>
-                ))}
-              </div>
-              <div className='flex justify-center mt-3'>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <button className="bg-gray-800 hover:bg-gray-700 text-white px-16 py-3 rounded flex items-center gap-2 transition-colors">
-                      View All
+                  ))}
+                <div className="w-full max-h-[313px] flex flex-col relative">
+                  <ModelViewer selectedModel={selectedModel} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} maxHeight={true} />
+
+                  <div className="absolute bottom-2 right-2 z-10 flex flex-col">
+                    <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded flex items-center gap-2 transition-colors">
+                      <Send size={18} />
+                      Request More Information
                     </button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-3xl bg-black">
+                  </div>
+                </div>
+              </div>
+              <div className='w-full'>
+                <Dialog>
+                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                    {(new Array(2).fill(0)).map(_ => (
+                      <div className='flex justify-center mt-3'>
+                        <DialogTrigger asChild>
+                          <button className="bg-gray-800 hover:bg-gray-700 text-white px-16 py-3 rounded flex items-center gap-2 transition-colors">
+                            View All
+                          </button>
+                        </DialogTrigger>
+                      </div>
+                    ))}
+                  </div>
+                  <DialogContent className="sm:max-w-7xl bg-black">
                     <DialogHeader>
                       <DialogTitle>All Models</DialogTitle>
                     </DialogHeader>
-                    <div className=" mx-auto p-4 text-white rounded-md">
+                    <div className="mx-auto p-4 text-white rounded-md">
                       <div className="grid grid-cols-2 gap-1">
-                        <div className='grid gap-6 overflow-auto max-h-96 scrollbar-hide'>
+                        <div className='grid gap-6 overflow-auto max-h-[600px] scrollbar-hide'>
                           {Object.keys(categories).map(cat => (
                             <div key={cat} className="border-b border-gray-700 pb-6">
                               <h3 className="text-xl font-bold mb-4 text-gray-200">{categories[cat].name}</h3>
@@ -492,10 +520,10 @@ export function Models5() {
                             </div>
                           ))}
                         </div>
-                        <div className="lg:w-full max-h-96 flex flex-col">
-                          <ModelViewer selectedModel={selectedModel} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} maxHeight={true}/>
+                        <div className="relative lg:w-full max-h-[600px] flex flex-col">
+                          <ModelViewer selectedModel={selectedModel} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} maxHeight={true} />
 
-                          <div className="mt-3 flex justify-center lg:justify-end">
+                          <div className="absolute bottom-2 right-2 z-10 flex flex-col">
                             <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded flex items-center gap-2 transition-colors">
                               <Send size={18} />
                               Request More Information
@@ -519,19 +547,6 @@ export function Models5() {
           scrollbar-width: none;  /* Firefox */
         }
       `}</style>
-            </div>
-          </div>
-
-
-          {/* Right side: 3D viewer */}
-          <div className="lg:w-full">
-            <ModelViewer selectedModel={selectedModel} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} />
-
-            <div className="mt-6 flex justify-center lg:justify-end">
-              <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded flex items-center gap-2 transition-colors">
-                <Send size={18} />
-                Request More Information
-              </button>
             </div>
           </div>
         </div>

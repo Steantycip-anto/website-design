@@ -1,34 +1,35 @@
 import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const allCustomerLogos = [
-  { id: 1, name: 'Cliente 1', logo: 'https://steantycip.com/wp-content/uploads/2021/04/AIRBUS-logo-1.png' },
-  { id: 2, name: 'Cliente 2', logo: 'https://steantycip.com/wp-content/uploads/2021/06/1280px-Leonardo_logo.svg.png' },
-  { id: 3, name: 'Cliente 3', logo: 'https://steantycip.com/wp-content/uploads/2021/04/58ee8d113545163ec1942cd3-1.png' },
-  { id: 4, name: 'Cliente 4', logo: 'https://steantycip.com/wp-content/uploads/2021/04/BAE_Systems_logo.svg-1.png' },
-  { id: 5, name: 'Cliente 5', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Safran-1.png' },
-  { id: 6, name: 'Cliente 6', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Thales-Logo-1.png' },
-  { id: 7, name: 'Cliente 7', logo: 'https://steantycip.com/wp-content/uploads/2021/04/DGA-logo-1.png' },
-  { id: 8, name: 'Cliente 8', logo: 'https://steantycip.com/wp-content/uploads/2021/04/naval-group-logo-1.png' },
-  { id: 9, name: 'Cliente 9', logo: 'https://steantycip.com/wp-content/uploads/2021/04/logo-elettronica-1.png' },
-  { id: 10, name: 'Cliente 10', logo: 'https://steantycip.com/wp-content/uploads/2021/04/lockheed-martin.png' },
-  { id: 11, name: 'Cliente 11', logo: 'https://steantycip.com/wp-content/uploads/2021/05/French-MOD.png' },
-  { id: 12, name: 'Cliente 12', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Spanish-MOD-logo-1.jpg' },
-  { id: 13, name: 'Cliente 13', logo: 'https://steantycip.com/wp-content/uploads/2021/04/MINDEF-Logo_svg-1.png' },
-  { id: 14, name: 'Cliente 14', logo: 'https://steantycip.com/wp-content/uploads/2021/04/UK-MOD-logo-1.png' },
-  { id: 15, name: 'Cliente 15', logo: 'https://steantycip.com/wp-content/uploads/2021/04/FFI-1.png' },
-  { id: 16, name: 'Cliente 16', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Universite_de_Lille_logo.svg-1.png' },
-  { id: 17, name: 'Cliente 17', logo: 'https://steantycip.com/wp-content/uploads/2021/04/University-of-Huddersfield-1-e1645792114485.gif' },
-  { id: 19, name: 'Cliente 19', logo: 'https://steantycip.com/wp-content/uploads/2021/04/University_of_Bath_logo.svg-1.png' },
-  { id: 20, name: 'Cliente 20', logo: 'https://steantycip.com/wp-content/uploads/2021/04/universite-de-caen-1.png' },{ id: 21, name: 'Cliente 21', logo: 'https://steantycip.com/wp-content/uploads/2021/05/university-of-leeds-logo-6B8E9B14B5-seeklogo.com_.png' },
-  { id: 22, name: 'Cliente 22', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Ecole_normale_superieure_de_Rennes-1.png' },
-  { id: 23, name: 'Cliente 23', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Renault_logo-1.png' },
-  { id: 24, name: 'Cliente 24', logo: 'https://steantycip.com/wp-content/uploads/2021/04/PSA-logo-1.png' },
-  { id: 25, name: 'Cliente 25', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Forth-ports-logo-1.png' },
-  { id: 26, name: 'Cliente 26', logo: 'https://steantycip.com/wp-content/uploads/2021/06/Arup_Logo_Red_RGB-e1645791964129.png' },
+  { id: 1, name: 'Cliente 1', logo: 'https://steantycip.com/wp-content/uploads/2021/04/AIRBUS-logo-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 2, name: 'Cliente 2', logo: 'https://steantycip.com/wp-content/uploads/2021/06/1280px-Leonardo_logo.svg.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 3, name: 'Cliente 3', logo: 'https://steantycip.com/wp-content/uploads/2021/04/58ee8d113545163ec1942cd3-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 4, name: 'Cliente 4', logo: 'https://steantycip.com/wp-content/uploads/2021/04/BAE_Systems_logo.svg-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 5, name: 'Cliente 5', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Safran-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 6, name: 'Cliente 6', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Thales-Logo-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 7, name: 'Cliente 7', logo: 'https://steantycip.com/wp-content/uploads/2021/04/DGA-logo-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 8, name: 'Cliente 8', logo: 'https://steantycip.com/wp-content/uploads/2021/04/naval-group-logo-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 9, name: 'Cliente 9', logo: 'https://steantycip.com/wp-content/uploads/2021/04/logo-elettronica-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 10, name: 'Cliente 10', logo: 'https://steantycip.com/wp-content/uploads/2021/04/lockheed-martin.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 11, name: 'Cliente 11', logo: 'https://steantycip.com/wp-content/uploads/2021/05/French-MOD.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 12, name: 'Cliente 12', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Spanish-MOD-logo-1.jpg', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 13, name: 'Cliente 13', logo: 'https://steantycip.com/wp-content/uploads/2021/04/MINDEF-Logo_svg-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 14, name: 'Cliente 14', logo: 'https://steantycip.com/wp-content/uploads/2021/04/UK-MOD-logo-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 15, name: 'Cliente 15', logo: 'https://steantycip.com/wp-content/uploads/2021/04/FFI-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 16, name: 'Cliente 16', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Universite_de_Lille_logo.svg-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 17, name: 'Cliente 17', logo: 'https://steantycip.com/wp-content/uploads/2021/04/University-of-Huddersfield-1-e1645792114485.gif', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 19, name: 'Cliente 19', logo: 'https://steantycip.com/wp-content/uploads/2021/04/University_of_Bath_logo.svg-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 20, name: 'Cliente 20', logo: 'https://steantycip.com/wp-content/uploads/2021/04/universite-de-caen-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." }, { id: 21, name: 'Cliente 21', logo: 'https://steantycip.com/wp-content/uploads/2021/05/university-of-leeds-logo-6B8E9B14B5-seeklogo.com_.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 22, name: 'Cliente 22', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Ecole_normale_superieure_de_Rennes-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 23, name: 'Cliente 23', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Renault_logo-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 24, name: 'Cliente 24', logo: 'https://steantycip.com/wp-content/uploads/2021/04/PSA-logo-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 25, name: 'Cliente 25', logo: 'https://steantycip.com/wp-content/uploads/2021/04/Forth-ports-logo-1.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
+  { id: 26, name: 'Cliente 26', logo: 'https://steantycip.com/wp-content/uploads/2021/06/Arup_Logo_Red_RGB-e1645791964129.png', review: "Morbi quis magna at dui facilisis dignissim ornare et augue. Sed vel ullamcorper metus. Sed quis tristique orci. Cras feugiat eget arcu sit amet sagittis. Vivamus vel condimentum tellus. Nunc ut ante leo. Cras tincidunt efficitur ullamcorper. Sed iaculis tellus eget pellentesque pharetra. Duis mattis, quam eget commodo condimentum, velit dolor laoreet mauris, ornare tincidunt sem ligula ac massa. Nunc ex mi, fringilla ac sodales et, pulvinar sit amet ipsum. Aliquam ac lacus dolor. Praesent a ante eu dui elementum egestas." },
 ];
 
 
-export function Customers1() {  
+export function Customers1() {
 
   // Numero di loghi da mostrare per pagina (2 righe con 5 loghi ciascuna)
   const logosPerPage = 9;
@@ -91,13 +92,13 @@ export function Customers1() {
             const isHidden = isAnimating && index <= animatingIndex;
 
             return (
-              <div 
+              <div
                 key={logo.id}
                 className={`relative transition-all duration-300 ${isHidden ? 'opacity-0 transform translate-y-8' : 'opacity-100'}`}
               >
                 <div className="bg-black p-4 rounded border border-white/30 group transition-all duration-300 hover:border-white flex items-center justify-center h-32">
-                  <img 
-                    src={logo.logo} 
+                  <img
+                    src={logo.logo}
                     alt={logo.name}
                     className="max-h-full max-w-full object-contain filter grayscale transition-all duration-300 group-hover:filter-none"
                   />
@@ -105,7 +106,7 @@ export function Customers1() {
               </div>
             );
           })}
-          <div 
+          <div
             key="number"
             className={`relative transition-all duration-300 ${isAnimating && currentLogos.length - 1 <= animatingIndex ? 'opacity-0 transform translate-y-8' : 'opacity-100'}`}
           >
@@ -195,18 +196,18 @@ export function Customers2() {
             const position = getPosition(index, currentLogos.length);
 
             return (
-              <div 
+              <div
                 key={logo.id}
                 className={`absolute transition-all duration-500 ${isHidden ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}`}
-                style={{ 
+                style={{
                   transform: `translate(${position.x}px, ${position.y}px)`,
                   transformOrigin: 'center center',
                   zIndex: currentLogos.length - index
                 }}
               >
                 <div className="bg-black p-3 w-24 h-24 rounded-full border border-white/30 group transition-all duration-300 hover:border-white flex items-center justify-center">
-                  <img 
-                    src={logo.logo} 
+                  <img
+                    src={logo.logo}
                     alt={logo.name}
                     className="max-h-full max-w-full object-contain filter grayscale transition-all duration-300 group-hover:filter-none"
                   />
@@ -278,18 +279,17 @@ export function Customers3() {
           <div className="overflow-hidden">
             <div className={`flex transition-transform duration-1500 ease-in-out`}>
               {getVisibleLogos().map((logo, index) => (
-                <div 
+                <div
                   key={`${logo.id}-${index}`}
-                  className={`flex-none w-1/3 md:w-1/6 px-4 transition-all duration-700 ${
-                    isAnimating && index === 0 ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
-                  }`}
+                  className={`flex-none w-1/3 md:w-1/6 px-4 transition-all duration-700 ${isAnimating && index === 0 ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+                    }`}
                   style={{
                     transitionDelay: isAnimating ? `${index * 150}ms` : '0ms'
                   }}
                 >
                   <div className="bg-black p-4 h-32 rounded border border-white/30 group transition-all duration-300 hover:border-white flex items-center justify-center">
-                    <img 
-                      src={logo.logo} 
+                    <img
+                      src={logo.logo}
                       alt={logo.name}
                       className="max-h-full max-w-full object-contain filter grayscale transition-all duration-300 group-hover:filter-none"
                     />
@@ -301,11 +301,10 @@ export function Customers3() {
 
           <div className="flex justify-center mt-8 gap-2">
             {Array.from({ length: 5 }).map((_, index) => (
-              <div 
+              <div
                 key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex % 5 ? 'bg-red-600 w-6' : 'bg-gray-600'
-                }`}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex % 5 ? 'bg-red-600 w-6' : 'bg-gray-600'
+                  }`}
               ></div>
             ))}
           </div>
@@ -381,19 +380,18 @@ export function LogoWall3D() {
               const isAnimating = animationStep > index;
 
               return (
-                <div 
+                <div
                   key={`${logo.id}-${index}`}
-                  className={`relative transition-all duration-500 ${
-                    isAnimating ? 'opacity-0 transform rotateY-90' : 'opacity-100 transform rotateY-0'
-                  }`}
+                  className={`relative transition-all duration-500 ${isAnimating ? 'opacity-0 transform rotateY-90' : 'opacity-100 transform rotateY-0'
+                    }`}
                   style={{
                     transformStyle: 'preserve-3d',
                     transform: isAnimating ? 'rotateY(90deg)' : 'rotateY(0deg)'
                   }}
                 >
                   <div className="bg-black p-4 rounded border border-white/30 group transition-all duration-300 hover:border-red-600 flex items-center justify-center h-40">
-                    <img 
-                      src={logo.logo} 
+                    <img
+                      src={logo.logo}
                       alt={logo.name}
                       className="max-h-full max-w-full object-contain filter grayscale transition-all duration-300 group-hover:filter-none"
                     />
@@ -405,7 +403,7 @@ export function LogoWall3D() {
         </div>
 
         <div className="flex justify-center mt-10">
-          <button 
+          <button
             className="bg-transparent border border-red-600 text-red-600 px-6 py-2 rounded-full hover:bg-red-600 hover:text-white transition-all duration-300"
             onClick={nextBatch}
           >
@@ -500,11 +498,10 @@ export function ExpandingGridLogos() {
             const isExpanded = hoveredLogo === logo.id;
 
             return (
-              <div 
+              <div
                 key={`${logo.id}-${index}`}
-                className={`relative transition-all duration-300 ${
-                  isHidden ? 'opacity-0 transform translate-y-8' : 'opacity-100'
-                }`}
+                className={`relative transition-all duration-300 ${isHidden ? 'opacity-0 transform translate-y-8' : 'opacity-100'
+                  }`}
                 style={{
                   transitionDelay: isTransitioning ? `${index * 50}ms` : '0ms',
                   zIndex: isExpanded ? 10 : 1
@@ -512,21 +509,19 @@ export function ExpandingGridLogos() {
                 onMouseEnter={() => setHoveredLogo(logo.id)}
                 onMouseLeave={() => setHoveredLogo(null)}
               >
-                <div 
-                  className={`bg-black p-4 rounded border border-white/30 group transition-all duration-300 hover:border-white flex items-center justify-center ${
-                    isExpanded ? 'scale-125 shadow-lg shadow-red-600/20' : ''
-                  }`}
+                <div
+                  className={`bg-black p-4 rounded border border-white/30 group transition-all duration-300 hover:border-white flex items-center justify-center ${isExpanded ? 'scale-125 shadow-lg shadow-red-600/20' : ''
+                    }`}
                   style={{
                     height: '120px',
                     transformOrigin: 'center center'
                   }}
                 >
-                  <img 
-                    src={logo.logo} 
+                  <img
+                    src={logo.logo}
                     alt={logo.name}
-                    className={`max-h-full max-w-full object-contain transition-all duration-300 ${
-                      isExpanded ? 'filter-none' : 'filter grayscale'
-                    }`}
+                    className={`max-h-full max-w-full object-contain transition-all duration-300 ${isExpanded ? 'filter-none' : 'filter grayscale'
+                      }`}
                   />
                 </div>
 
@@ -542,11 +537,10 @@ export function ExpandingGridLogos() {
 
         <div className="flex justify-center mt-10 gap-2">
           {Array.from({ length: Math.min(5, Math.ceil(allCustomerLogos.length / logosPerPage)) }).map((_, index) => (
-            <div 
+            <div
               key={index}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentPage % 5 ? 'bg-red-600' : 'bg-gray-600'
-              }`}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentPage % 5 ? 'bg-red-600' : 'bg-gray-600'
+                }`}
             ></div>
           ))}
         </div>
@@ -554,3 +548,367 @@ export function ExpandingGridLogos() {
     </div>
   );
 }
+
+//with reviews
+
+export const CarouselVariant = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Automatic carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === allCustomerLogos.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="bg-gray-50 py-16 px-4 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold text-black text-center mb-12">
+          <span className="text-red-600">Clienti</span> soddisfatti
+        </h2>
+
+        {/* Logos Bar */}
+        <div className="flex overflow-hidden mb-16">
+          <motion.div
+            className="flex space-x-12 items-center"
+            animate={{
+              x: ["0%", "-100%"],
+            }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 30,
+              ease: "linear",
+            }}
+          >
+            {[...allCustomerLogos, ...allCustomerLogos].map((customer, index) => (
+              <div key={`logo-${customer.id}-${index}`} className="h-16 w-32 flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300">
+                <img
+                  src={customer.logo}
+                  alt={customer.name}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Featured Review */}
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="bg-white p-8 rounded-lg shadow-lg text-center"
+          >
+            <div className="h-20 w-20 mx-auto mb-6">
+              <img
+                src={allCustomerLogos[currentIndex].logo}
+                alt={allCustomerLogos[currentIndex].name}
+                className="h-full w-full object-contain"
+              />
+            </div>
+            <p className="text-gray-700 italic text-lg mb-6">"{allCustomerLogos[currentIndex].review}"</p>
+            <p className="font-semibold text-red-600">{allCustomerLogos[currentIndex].name}</p>
+          </motion.div>
+
+          {/* Dots navigation */}
+          <div className="flex justify-center space-x-2 mt-8">
+            {allCustomerLogos.map((_, index) => (
+              <button
+                key={`dot-${index}`}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-3 w-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-red-600 w-6' : 'bg-gray-300'
+                  }`}
+                aria-label={`Go to review ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+export const GridVariant = () => {
+  return (
+    <section className="bg-black text-white py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-4">
+          Cosa dicono i <span className="text-red-500">nostri clienti</span>
+        </h2>
+        <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+          Collaboriamo con aziende di ogni dimensione per creare soluzioni personalizzate
+        </p>
+
+        {/* Logo grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-16">
+          {allCustomerLogos.map((customer) => (
+            <motion.div
+              key={customer.id}
+              whileHover={{
+                scale: 1.05,
+                filter: "grayscale(0)"
+              }}
+              className="bg-gray-900 rounded-lg p-6 flex items-center justify-center h-32"
+              initial={{ filter: "grayscale(100%)" }}
+            >
+              <img
+                src={customer.logo}
+                alt={customer.name}
+                className="max-h-16 max-w-full object-contain"
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Reviews */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allCustomerLogos.slice(0, 3).map((customer) => (
+            <motion.div
+              key={`review-${customer.id}`}
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: customer.id * 0.1 }}
+              className="bg-gray-900 p-6 rounded-lg"
+            >
+              <div className="flex items-center mb-4">
+                <div className="h-12 w-12 mr-4">
+                  <img
+                    src={customer.logo}
+                    alt={customer.name}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <h3 className="font-semibold text-xl">{customer.name}</h3>
+              </div>
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-red-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-400">"{customer.review}"</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300">
+            Vedi tutte le recensioni
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+export const TabsVariant = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <section className="py-16 px-4 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row">
+          {/* Left Section: Logos */}
+          <div className="md:w-1/3 mb-8 md:mb-0">
+            <h2 className="text-3xl font-bold text-black mb-6">
+              Aziende che si <span className="text-red-600">fidano</span> di noi
+            </h2>
+            <div className="flex flex-wrap gap-4">
+              {allCustomerLogos.slice(0, 12).map((customer, index) => (
+                <motion.button
+                  key={customer.id}
+                  onClick={() => setActiveTab(index)}
+                  className={`p-4 rounded-lg border-2 transition-all ${activeTab === index
+                      ? 'border-red-600 bg-red-50'
+                      : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  whileHover={{ y: -5 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <img
+                    src={customer.logo}
+                    alt={customer.name}
+                    className="h-10 w-20 object-contain"
+                  />
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Section: Testimonials */}
+          <div className="md:w-2/3 md:pl-12 flex flex-col justify-center">
+            <div className="relative bg-gray-100 p-8 rounded-xl">
+              {/* Red accent */}
+              <div className="absolute left-0 top-8 bottom-8 w-1 bg-red-600"></div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <svg className="w-12 h-12 text-red-200 mb-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+
+                  <p className="text-gray-700 text-xl mb-6 leading-relaxed">
+                    {allCustomerLogos[activeTab].review}
+                  </p>
+
+                  <div className="flex items-center">
+                    <div className="h-14 w-14 bg-white p-2 rounded-full shadow-md mr-4">
+                      <img
+                        src={allCustomerLogos[activeTab].logo}
+                        alt={allCustomerLogos[activeTab].name}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg">{allCustomerLogos[activeTab].name}</h3>
+                      <div className="flex mt-1">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-4 h-4 text-red-600 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Navigation dots */}
+            <div className="flex justify-center space-x-2 mt-6">
+              {allCustomerLogos.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveTab(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${index === activeTab ? 'bg-red-600 w-8' : 'bg-gray-300 w-2'
+                    }`}
+                  aria-label={`View testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export const GridCarouselVariant = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Automatic carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === allCustomerLogos.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="bg-black text-white py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-4">
+          Cosa dicono i <span className="text-red-500">nostri clienti</span>
+        </h2>
+        <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+          Collaboriamo con aziende di ogni dimensione per creare soluzioni personalizzate
+        </p>
+
+        {/* Logo grid */}
+        <div className="flex overflow-hidden mb-16">
+          <motion.div
+            className="flex space-x-12 items-center"
+            animate={{
+              x: ["0%", "-100%"],
+            }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 30,
+              ease: "linear",
+            }}
+          >
+            {[...allCustomerLogos, ...allCustomerLogos].map((customer, index) => (
+              <motion.div
+                key={`logo-${customer.id}-${index}`}
+                whileHover={{
+                  scale: 1.05,
+                  filter: "grayscale(0)"
+                }}
+                className="bg-gray-900 rounded-lg p-6 flex items-center justify-center h-32 w-64"
+                initial={{ filter: "grayscale(100%)" }}
+              >
+                <img
+                  src={customer.logo}
+                  alt={customer.name}
+                  className="max-h-16 max-w-full object-contain"
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Reviews */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allCustomerLogos.slice(0, 3).map((customer) => (
+            <motion.div
+              key={`review-${customer.id}`}
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: customer.id * 0.1 }}
+              className="bg-gray-900 p-6 rounded-lg"
+            >
+              <div className="flex items-center mb-4">
+                <div className="h-12 w-12 mr-4">
+                  <img
+                    src={customer.logo}
+                    alt={customer.name}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <h3 className="font-semibold text-xl">{customer.name}</h3>
+              </div>
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-red-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-400">"{customer.review}"</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300">
+            Vedi tutte le recensioni
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
