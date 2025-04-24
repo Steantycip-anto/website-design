@@ -10,7 +10,9 @@ import * as Expertises from "@/components/expertises";
 import * as Models3D from "@/components/models3d";
 import * as Projects from "@/components/projects";
 import * as Timelines from "@/components/timelines";
+import * as Globality from "@/components/globality";
 import * as Features from "@/components/features";
+import * as Footers from "@/components/footer";
 
 
 const SITE_SECTIONS = [
@@ -71,7 +73,6 @@ const SITE_SECTIONS = [
     },
     defaultActive: "models5"
   },
-
   {
     type: "customers",
     title: "Customers",
@@ -110,24 +111,25 @@ const SITE_SECTIONS = [
     defaultActive: "horizontal-timeline"
   },
   {
-    type: "feature",
-    title: "Feature",
+    type: "globality",
+    title: "Globality",
     components: {
-      "feature1": { name: "Feature 1", component: Features.Feature1 },
-      // Aggiungi un nuovo content component qui
+      "global-projects-map": { name: "Global Projects Map", component: Globality.GlobalProjectsMap },
+      "rotating-globe-projects": { name: "Rotating Globe Projects", component: Globality.RotatingGlobeProjects },
+      "dynamic-country-cards": { name: "Dynamic Country Cards", component: Globality.DynamicCountryCards },
     },
-    defaultActive: "feature1"
+    defaultActive: "rotating-globe-projects"
   },
-  // Aggiungi una nuova categoria di sezione qui
-  // {
-  //   type: "testimonials",
-  //   title: "Testimonials",
-  //   components: {
-  //     "testimonials-grid": { name: "Grid Layout", component: TestimonialComponents.TestimonialsGrid },
-  //     "testimonials-carousel": { name: "Carousel", component: TestimonialComponents.TestimonialsCarousel },
-  //   },
-  //   defaultActive: "testimonials-grid"
-  // },
+  {
+    type: "footer",
+    title: "Footer",
+    components: {
+      "minimal-column-footer": { name: "Minimal Column Footer", component: Footers.MinimalColumnFooter },
+      "geometric-grid-footer": { name: "Geometric Grid Footer", component: Footers.GeometricGridFooter },
+      "futuristic-interactive-footer": { name: "Futuristic Interactive Footer", component: Footers.FuturisticInteractiveFooter },
+    },
+    defaultActive: "minimal-column-footer"
+  },
 ];
 
 // Componente selettore di sezione
