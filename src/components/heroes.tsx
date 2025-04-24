@@ -562,7 +562,7 @@ export const Numbers3 = () => {
           
           {/* Company Stats - Horizontal with animated counters */}
           <motion.div 
-            className="mt-16 py-6 px-4 md:px-8 bg-black/40 backdrop-blur-sm border-t border-b border-gray-800"
+            className="mt-16 py-6 px-4 md:px-8 border-t border-b border-gray-800"
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6 }}

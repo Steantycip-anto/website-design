@@ -27,11 +27,11 @@ const SITE_SECTIONS = [
       "variant-1": { name: "Variant 1", component: HeadersComponents.TechMenuDesign1 },
       "variant-2": { name: "Variant 2", component: HeadersComponents.TechMenuDesign2 },
       "variant-3": { name: "Variant 3", component: HeadersComponents.TechMenuDesign3 },
-      "variant-one": { name: "Variant One", component: HeadersComponents.VariantOne },
-      "variant-two": { name: "Variant Two", component: HeadersComponents.VariantTwo },
-      "variant-three": { name: "Variant Three", component: HeadersComponents.VariantThree },
+      "variant-4": { name: "Variant One", component: HeadersComponents.VariantOne },
+      "variant-5": { name: "Variant Two", component: HeadersComponents.VariantTwo },
+      "variant-6": { name: "Variant Three", component: HeadersComponents.VariantThree },
     },
-    defaultActive: "variant-one"
+    defaultActive: "variant-4"
   },
   {
     type: "hero",
@@ -47,7 +47,7 @@ const SITE_SECTIONS = [
       "hero-numbers2": { name: "Numbers 2", component: HeroComponents.Numbers2 },
       "hero-numbers3": { name: "Numbers 3", component: HeroComponents.Numbers3 },
     },
-    defaultActive: "hero-numbers1"
+    defaultActive: "hero-numbers3"
   },
   {
     type: "expertise",

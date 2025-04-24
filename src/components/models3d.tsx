@@ -464,17 +464,12 @@ export function Models5() {
               </div>
               <div className='w-full'>
                 <Dialog>
-                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-                    {(new Array(2).fill(0)).map(_ => (
-                      <div className='flex justify-center mt-3'>
-                        <DialogTrigger asChild>
-                          <button className="bg-gray-800 hover:bg-gray-700 text-white px-16 py-3 rounded flex items-center gap-2 transition-colors">
-                            View All
-                          </button>
-                        </DialogTrigger>
-                      </div>
-                    ))}
-                  </div>
+                  <div className='w-2/3 flex justify-center mt-3'>
+                    <DialogTrigger asChild>
+                      <button className="bg-gray-800 hover:bg-gray-700 text-white px-16 py-3 rounded flex items-center gap-2 transition-colors">
+                        View All
+                      </button>
+                    </DialogTrigger></div>
                   <DialogContent className="sm:max-w-7xl bg-black">
                     <DialogHeader>
                       <DialogTitle>All Models</DialogTitle>
