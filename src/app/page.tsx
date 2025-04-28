@@ -97,7 +97,7 @@ const SITE_SECTIONS = [
       "projects2": { name: "Projects 2", component: Projects.ProjectsSection2 },
       "projects3": { name: "Projects 3", component: Projects.ProjectsSection3 },
     },
-    defaultActive: "projects2"
+    defaultActive: "projects1"
   },
   {
     type: "timeline",
@@ -118,7 +118,7 @@ const SITE_SECTIONS = [
       "rotating-globe-projects": { name: "Rotating Globe Projects", component: Globality.RotatingGlobeProjects },
       "dynamic-country-cards": { name: "Dynamic Country Cards", component: Globality.DynamicCountryCards },
     },
-    defaultActive: "rotating-globe-projects"
+    defaultActive: "dynamic-country-cards"
   },
   {
     type: "footer",
@@ -128,7 +128,7 @@ const SITE_SECTIONS = [
       "geometric-grid-footer": { name: "Geometric Grid Footer", component: Footers.GeometricGridFooter },
       "futuristic-interactive-footer": { name: "Futuristic Interactive Footer", component: Footers.FuturisticInteractiveFooter },
     },
-    defaultActive: "minimal-column-footer"
+    defaultActive: "futuristic-interactive-footer"
   },
 ];
 

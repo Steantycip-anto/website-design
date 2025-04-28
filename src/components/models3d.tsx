@@ -5,58 +5,9 @@ import { CameraControls, Environment, useGLTF } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Card } from './ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { useRouter } from 'next/navigation';
+import { models} from "@/lib/models";
 
-// Dati di esempio per i modelli 3D
-const models = [
-  {
-    id: 1,
-    title: 'Flight Simulator',
-    thumbnail: 'https://www.shutterstock.com/image-photo/airplane-isolated-on-black-background-600nw-2172233699.jpg',
-    description: 'Advanced flight simulator model with realistic cockpit controls and physics.',
-    category: 'Aviation',
-    modelPath: "/models/model1.glb"
-  },
-  {
-    id: 2,
-    title: 'Virtual City',
-    thumbnail: 'https://us.123rf.com/450wm/podsolnukh/podsolnukh1410/podsolnukh141000167/32438128-fighter-plane-model-body-structure-wire-model.jpg?ver=6',
-    description: 'Detailed urban environment model for city planning and infrastructure simulation.',
-    category: 'Urban Planning',
-    modelPath: "/models/model2.glb"
-  },
-  {
-    id: 3,
-    title: 'Submarine Control Room',
-    thumbnail: 'https://l450v.alamy.com/450v/mhykex/blank-commercial-airplane-takeoff-with-four-engines-on-black-background-3d-illustration-mhykex.jpg',
-    description: 'Immersive submarine control room with operational panels and systems.',
-    category: 'Naval',
-    modelPath: "/models/model1.glb"
-  },
-  {
-    id: 4,
-    title: 'Factory Layout',
-    thumbnail: 'https://png.pngtree.com/background/20230827/original/pngtree-3d-rendering-airline-travel-against-a-black-background-picture-image_4840047.jpg',
-    description: 'Industrial factory layout with production line and equipment simulation.',
-    category: 'Industrial',
-    modelPath: "/models/model2.glb"
-  },
-  {
-    id: 5,
-    title: 'Military Vehicle',
-    thumbnail: 'https://img.freepik.com/premium-photo/cruise-ship-shape-fire-black-background-generative-ai_918839-3563.jpg',
-    description: 'High-fidelity armored vehicle model with detailed components and systems.',
-    category: 'Defense',
-    modelPath: "/models/model1.glb"
-  },
-  {
-    id: 6,
-    title: 'Training Facility',
-    thumbnail: 'https://p.turbosquid.com/ts-thumb/FL/orWveU/iDsdBpKP/poltava/jpg/1468070509/1920x1080/turn_fit_q99/c1bfa3dd415bb04eba0c636a5f84498bad73853a/poltava-1.jpg',
-    description: 'Complete training facility environment for emergency response simulations.',
-    category: 'Training',
-    modelPath: "/models/model2.glb"
-  },
-];
 
 const Env = ({ setLoaded }) => {
   useEffect(() => {
@@ -77,7 +28,7 @@ const Model = ({ modelPath }) => {
   );
 };
 
-const ModelViewer = ({ selectedModel, isInfoOpen, setIsInfoOpen, maxHeight = false }) => {
+export const ModelViewer = ({ selectedModel, isInfoOpen, setIsInfoOpen, maxHeight = false }) => {
   const [loaded, setLoaded] = useState(false);
   const cameraRef = useRef();
 
@@ -368,6 +319,7 @@ export function Models5() {
   // Stato per il modello selezionato (default: primo modello)
   const [selectedModel, setSelectedModel] = useState(models[0]);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <section className="bg-black text-white py-16">
@@ -400,7 +352,7 @@ export function Models5() {
                   .map(c => (
                     <div>
                       {c.map(cat => (
-                        <div key={cat} className="border-b border-gray-700 pb-6">
+                        <div key={cat} className="border-b border-gray-700 pb-6 pt-1">
                           <h3 className="text-xl font-bold mb-4 text-gray-200">{categories[cat].name}</h3>
 
                           <div className="relative">
@@ -451,32 +403,34 @@ export function Models5() {
                       ))}
                     </div>
                   ))}
-                <div className="w-full max-h-[313px] flex flex-col relative">
+                <div className="w-full flex flex-col relative border-b border-gray-700 max-h-[353px]">
                   <ModelViewer selectedModel={selectedModel} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} maxHeight={true} />
-
-                  <div className="absolute bottom-2 right-2 z-10 flex flex-col">
-                    <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded flex items-center gap-2 transition-colors">
-                      <Send size={18} />
-                      Request More Information
-                    </button>
-                  </div>
                 </div>
               </div>
               <div className='w-full'>
                 <Dialog>
-                  <div className='w-2/3 flex justify-center mt-3'>
-                    <DialogTrigger asChild>
-                      <button className="bg-gray-800 hover:bg-gray-700 text-white px-16 py-3 rounded flex items-center gap-2 transition-colors">
-                        View All
+                  <div className="flex">
+                    <div className='w-2/3 flex justify-center mt-3'>
+                      <DialogTrigger asChild>
+                        <button className="bg-gray-800 hover:bg-gray-700 text-white px-16 py-3 rounded flex items-center gap-2 transition-colors">
+                          View All
+                        </button>
+                      </DialogTrigger>
+                    </div>
+                    <div className='w-1/3 flex justify-center mt-3'>
+                      <button className="bg-red-800 hover:bg-red-700 text-white px-16 py-3 rounded flex items-center gap-2 transition-colors" onClick={() => router.push('/models/' + selectedModel.id)}>
+                        <Send size={18} />
+                        Model Information
                       </button>
-                    </DialogTrigger></div>
-                  <DialogContent className="sm:max-w-7xl bg-black">
+                    </div>
+                    </div>
+                  <DialogContent className="md:max-w-3xl lg:max-w-6xl max-w-xl bg-black">
                     <DialogHeader>
                       <DialogTitle>All Models</DialogTitle>
                     </DialogHeader>
                     <div className="mx-auto p-4 text-white rounded-md">
                       <div className="grid grid-cols-2 gap-1">
-                        <div className='grid gap-6 overflow-auto max-h-[600px] scrollbar-hide'>
+                        <div className='grid gap-6 overflow-auto max-h-[calc(100vh-300px)] scrollbar-hide'>
                           {Object.keys(categories).map(cat => (
                             <div key={cat} className="border-b border-gray-700 pb-6">
                               <h3 className="text-xl font-bold mb-4 text-gray-200">{categories[cat].name}</h3>
@@ -515,11 +469,11 @@ export function Models5() {
                             </div>
                           ))}
                         </div>
-                        <div className="relative lg:w-full max-h-[600px] flex flex-col">
+                        <div className="relative lg:w-full max-h-[calc(100vh-300px)] flex flex-col">
                           <ModelViewer selectedModel={selectedModel} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} maxHeight={true} />
 
                           <div className="absolute bottom-2 right-2 z-10 flex flex-col">
-                            <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded flex items-center gap-2 transition-colors">
+                            <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded flex items-center gap-2 transition-colors"  onClick={() => router.push('/models/' + selectedModel.id)}>
                               <Send size={18} />
                               Request More Information
                             </button>
