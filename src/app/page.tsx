@@ -97,7 +97,7 @@ const SITE_SECTIONS = [
       "projects2": { name: "Projects 2", component: Projects.ProjectsSection2 },
       "projects3": { name: "Projects 3", component: Projects.ProjectsSection3 },
     },
-    defaultActive: "projects1"
+    defaultActive: "projects3"
   },
   {
     type: "timeline",

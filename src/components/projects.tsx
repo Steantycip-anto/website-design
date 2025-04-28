@@ -98,7 +98,7 @@ const projects = [
         description: "Modeling and simulation solutions supporting the European Union's maritime initiatives, enhancing situational awareness and decision-making.",
         stats: { clients: "European Union", vessels: "30+", scenarios: "120+" },
         image: "https://steantycip.com/wp-content/uploads/2022/03/OCEAN2020_ThirdSimulatedTrialOverview1-1024x558.jpg",
-        color: "rgb(0, 0, 0)",
+        color: "rgb(49, 166, 156)",
         year: "2021"
     },
     {
@@ -109,7 +109,7 @@ const projects = [
         description: "High-fidelity simulation solutions for armed forces and Eurofighter training, improving pilot skills and tactical proficiency.",
         stats: { launched: "2021", pilots: "300+", flightHours: "12K+" },
         image: "https://steantycip.com/wp-content/uploads/2022/03/Screenshot-HLA-2-1024x660.jpg",
-        color: "rgb(0, 0, 0)",
+        color: "rgb(173, 207, 110)",
         year: "2021"
     }
 
