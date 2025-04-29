@@ -6,8 +6,7 @@ import { Canvas } from '@react-three/fiber';
 import { Card } from './ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { useRouter } from 'next/navigation';
-import { models} from "@/lib/models";
-
+import { models} from "@/lib/data";
 
 const Env = ({ setLoaded }) => {
   useEffect(() => {

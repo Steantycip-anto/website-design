@@ -791,8 +791,8 @@ export function TechMenuDesign3() {
 
 //new menu
 
-const menuFirstRow = ['Contact us', 'Careers', 'News', 'About', 'Corporate'];
-const menuSecondRow = ['Solution/Offer', 'Products & Services', 'Markets', 'Projects', 'Events'];
+const menuFirstRow = [{text: 'Contact us', href: "/contact"}, {text: 'Careers', href: "/career"}, {text: 'News', href: "/news"}, {text: 'About', href: "/about"}, {text: 'Corporate', href: "/corporate"}];
+const menuSecondRow = [{text: 'Solution/Offer', href : '/solution-offer'}, {text: 'Products & Services', href: '/products-services'}, {text: 'Markets', href: '/markets'}, {text: 'Projects', href: '/projects'}, {text: 'Events', href: '/events'}];
 
 export function VariantOne() {
   return (
@@ -800,7 +800,9 @@ export function VariantOne() {
       <div className="px-6 py-3 flex justify-between items-center gap-6">
         {/* Left Column: Logo */}
         <div className="h-full flex items-center">
-          <Image src="https://steantycip.com/wp-content/uploads/2024/12/ANT24_Logotype-Master_White-RGB.png" alt="Logo" width={300} height={80} />
+          <a href="/" className="flex items-center">
+            <Image src="https://steantycip.com/wp-content/uploads/2024/12/ANT24_Logotype-Master_White-RGB.png" alt="Logo" width={300} height={80} />
+          </a>
         </div>
 
         {/* Right Column: Menu */}
@@ -809,7 +811,9 @@ export function VariantOne() {
             <div className="flex-1 flex justify-center items-center gap-6">
               <ul className="flex gap-6">
                 {menuFirstRow.map((item) => (
-                  <li key={item} className="hover:text-red-500 cursor-pointer">{item}</li>
+                  <li key={item} className="hover:text-red-500 cursor-pointer">
+                    <a href={item.href}>{item.text}</a>
+                  </li>
                 ))}
               </ul>
               <button className="bg-red-600 hover:bg-red-700 text-white text-sm px-5 py-1 rounded-xl transition-all">
@@ -833,7 +837,9 @@ export function VariantOne() {
           <div className="flex justify-end py-3">
             <ul className="flex gap-8 text-lg">
               {menuSecondRow.map((item) => (
-                <li key={item} className="hover:text-red-500 cursor-pointer">{item}</li>
+                <li key={item} className="hover:text-red-500 cursor-pointer">
+                <a href={item.href}>{item.text}</a>
+              </li>
               ))}
             </ul>
           </div>

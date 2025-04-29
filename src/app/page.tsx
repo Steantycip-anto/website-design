@@ -14,8 +14,7 @@ import * as Globality from "@/components/globality";
 import * as Features from "@/components/features";
 import * as Footers from "@/components/footer";
 
-
-const SITE_SECTIONS = [
+const FIXED_SECTIONS = [
   {
     type: "header",
     title: "Header",
@@ -31,8 +30,21 @@ const SITE_SECTIONS = [
       "variant-5": { name: "Variant Two", component: HeadersComponents.VariantTwo },
       "variant-6": { name: "Variant Three", component: HeadersComponents.VariantThree },
     },
-    defaultActive: "variant-4"
+    defaultActive: "variant-4",
   },
+  {
+    type: "footer",
+    title: "Footer",
+    components: {
+      "minimal-column-footer": { name: "Minimal Column Footer", component: Footers.MinimalColumnFooter },
+      "geometric-grid-footer": { name: "Geometric Grid Footer", component: Footers.GeometricGridFooter },
+      "futuristic-interactive-footer": { name: "Futuristic Interactive Footer", component: Footers.FuturisticInteractiveFooter },
+    },
+    defaultActive: "futuristic-interactive-footer",
+  },
+]
+
+export const SITE_SECTIONS = [
   {
     type: "hero",
     title: "Hero",
@@ -120,16 +132,6 @@ const SITE_SECTIONS = [
     },
     defaultActive: "dynamic-country-cards"
   },
-  {
-    type: "footer",
-    title: "Footer",
-    components: {
-      "minimal-column-footer": { name: "Minimal Column Footer", component: Footers.MinimalColumnFooter },
-      "geometric-grid-footer": { name: "Geometric Grid Footer", component: Footers.GeometricGridFooter },
-      "futuristic-interactive-footer": { name: "Futuristic Interactive Footer", component: Footers.FuturisticInteractiveFooter },
-    },
-    defaultActive: "futuristic-interactive-footer"
-  },
 ];
 
 // Componente selettore di sezione
@@ -153,10 +155,17 @@ const SectionSelector = ({ sections, activeId, onChange, title }) => (
   </div>
 );
 
-export default function Page() {
+export function CompletePage({site_sections = []}) {
+  // Modifica la variabile site_sections aggiungendo i FIXED_SECTIONS inserendo il tipo header all'inizio e footer alla fine
+  site_sections = [
+    ...FIXED_SECTIONS.filter(section => section.type === "header"),
+    ...site_sections,
+    ...FIXED_SECTIONS.filter(section => section.type === "footer"),
+  ];
+
   // Inizializza lo stato per ogni tipo di sezione con il valore predefinito
   const [activeSections, setActiveSections] = useState(() => {
-    return SITE_SECTIONS.reduce((acc, section) => {
+    return site_sections.reduce((acc, section) => {
       acc[section.type] = section.defaultActive;
       return acc;
     }, {});
@@ -179,7 +188,7 @@ export default function Page() {
         <label htmlFor="show" className="opacity-30">Show Options selectior</label>
       </div>
       {/* Render dinamico di tutte le sezioni configurate */}
-      {SITE_SECTIONS.map((sectionConfig) => {
+      {site_sections.map((sectionConfig) => {
         const activeId = activeSections[sectionConfig.type];
         const ActiveComponent = sectionConfig.components[activeId].component;
 
@@ -201,3 +210,6 @@ export default function Page() {
     </div>
   );
 }
+
+const Page = () => <CompletePage site_sections={SITE_SECTIONS} />
+export default Page
