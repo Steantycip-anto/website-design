@@ -1446,6 +1446,90 @@ export function ProjectsPageVariant3() {
         )}
       </div>
       
+      <div className="bg-gray-900 border-t border-gray-800 py-16">
+        <div className="max-w-screen-xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {/* Testimonials */}
+            <div>
+              <div className="flex items-center mb-6">
+                <Users className="w-6 h-6 text-red-500 mr-3" />
+                <h2 className="text-2xl font-bold">Client Testimonials</h2>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                  <p className="italic text-gray-300 mb-4">
+                    "The team delivered an exceptional product that exceeded our expectations. Their attention to detail and innovative approach helped us achieve our goals faster than anticipated."
+                  </p>
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white font-medium mr-3">JD</div>
+                    <div>
+                      <h4 className="font-medium">John Doe</h4>
+                      <p className="text-sm text-gray-400">CTO, Tech Innovations Inc.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                  <p className="italic text-gray-300 mb-4">
+                    "We've partnered on multiple projects and each time they've delivered outstanding results. Their technical expertise combined with creative vision makes them our go-to development partner."
+                  </p>
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white font-medium mr-3">AS</div>
+                    <div>
+                      <h4 className="font-medium">Amanda Smith</h4>
+                      <p className="text-sm text-gray-400">Project Manager, Global Solutions</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Awards */}
+            <div>
+              <div className="flex items-center mb-6">
+                <Award className="w-6 h-6 text-red-500 mr-3" />
+                <h2 className="text-2xl font-bold">Awards & Recognition</h2>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                  <div className="flex items-center justify-center h-12 mb-4">
+                    <Award className="w-8 h-8 text-yellow-500" />
+                  </div>
+                  <h3 className="font-semibold text-center mb-2">Innovation Award</h3>
+                  <p className="text-sm text-gray-400 text-center">Best Technology Solution 2024</p>
+                </div>
+                
+                <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                  <div className="flex items-center justify-center h-12 mb-4">
+                    <Award className="w-8 h-8 text-blue-500" />
+                  </div>
+                  <h3 className="font-semibold text-center mb-2">Design Excellence</h3>
+                  <p className="text-sm text-gray-400 text-center">UI/UX Design Awards 2023</p>
+                </div>
+                
+                <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                  <div className="flex items-center justify-center h-12 mb-4">
+                    <Award className="w-8 h-8 text-purple-500" />
+                  </div>
+                  <h3 className="font-semibold text-center mb-2">Industry Leader</h3>
+                  <p className="text-sm text-gray-400 text-center">Tech Innovation Summit 2024</p>
+                </div>
+                
+                <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                  <div className="flex items-center justify-center h-12 mb-4">
+                    <Award className="w-8 h-8 text-green-500" />
+                  </div>
+                  <h3 className="font-semibold text-center mb-2">Client Satisfaction</h3>
+                  <p className="text-sm text-gray-400 text-center">Top Service Provider 2023</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       {/* Footer / Call to action */}
       <div className="bg-gradient-to-b from-black to-gray-900">
         <div className="max-w-screen-xl mx-auto px-4 py-20">

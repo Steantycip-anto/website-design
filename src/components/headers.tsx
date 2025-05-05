@@ -791,7 +791,7 @@ export function TechMenuDesign3() {
 
 //new menu
 
-const menuFirstRow = [{text: 'Contact us', href: "/contact"}, {text: 'Careers', href: "/career"}, {text: 'News', href: "/news"}, {text: 'About', href: "/about"}, {text: 'Corporate', href: "/corporate"}];
+const menuFirstRow = [{text: 'Blog', href: "/blog"}, {text: 'Careers', href: "/career"}, {text: 'News', href: "/news"}, {text: 'About', href: "/about"}, {text: 'Corporate', href: "/corporate"}];
 const menuSecondRow = [{text: 'Solution/Offer', href : '/solution-offer'}, {text: 'Products & Services', href: '/products-services'}, {text: 'Markets', href: '/markets'}, {text: 'Projects', href: '/projects'}, {text: 'Events', href: '/events'}];
 
 export function VariantOne() {
