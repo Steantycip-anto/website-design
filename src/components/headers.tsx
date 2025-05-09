@@ -791,8 +791,8 @@ export function TechMenuDesign3() {
 
 //new menu
 
-const menuFirstRow = [{text: 'Blog', href: "/blog"}, {text: 'Careers', href: "/career"}, {text: 'News', href: "/news"}, {text: 'About', href: "/about"}, {text: 'Corporate', href: "/corporate"}];
-const menuSecondRow = [{text: 'Solution/Offer', href : '/solution-offer'}, {text: 'Products & Services', href: '/products-services'}, {text: 'Markets', href: '/markets'}, {text: 'Projects', href: '/projects'}, {text: 'Events', href: '/events'}];
+const menuFirstRow = [{ text: 'Blog', href: "/blog" }, { text: 'Careers', href: "/career" }, { text: 'News', href: "/news" }, { text: 'About', href: "/about" }, { text: 'Corporate', href: "/corporate" }];
+const menuSecondRow = [{ text: 'Solution/Offer', href: '/solution-offer' }, { text: 'Products & Services', href: '/products-services' }, { text: 'Markets', href: '/markets' }, { text: 'Projects', href: '/projects' }, { text: 'Events', href: '/events' }];
 
 export function VariantOne() {
   return (
@@ -817,7 +817,9 @@ export function VariantOne() {
                 ))}
               </ul>
               <button className="bg-red-600 hover:bg-red-700 text-white text-sm px-5 py-1 rounded-xl transition-all">
-                Contact Us
+                <a href="/contact-us">
+                  Contact Us
+                </a>
               </button>
             </div>
             <div className="flex items-center gap-4 ml-6">
@@ -838,8 +840,8 @@ export function VariantOne() {
             <ul className="flex gap-8 text-lg">
               {menuSecondRow.map((item) => (
                 <li key={item} className="hover:text-red-500 cursor-pointer">
-                <a href={item.href}>{item.text}</a>
-              </li>
+                  <a href={item.href}>{item.text}</a>
+                </li>
               ))}
             </ul>
           </div>

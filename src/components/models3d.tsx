@@ -317,6 +317,7 @@ export function Models5() {
   }
   // Stato per il modello selezionato (default: primo modello)
   const [selectedModel, setSelectedModel] = useState(models[0]);
+  const [selectedCategory, setSelectedCategory] = useState("Fixed wings");
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const router = useRouter();
 
@@ -364,12 +365,13 @@ export function Models5() {
                                   className={`
                       flex-shrink-0 w-24 snap-start
                       cursor-pointer
-                      border-2 ${selectedModel.id === models[i]?.id ? 'border-white' : 'border-gray-800'}
+                      border-2 ${selectedModel.id === models[i]?.id && cat === selectedCategory ? 'border-white' : 'border-gray-800'}
                       rounded-xl overflow-hidden relative group
                       transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-red-900/20
                     `}
                                   onClick={() => {
                                     setSelectedModel(models[i] || {});
+                                    setSelectedCategory(cat);
                                     setIsInfoOpen(false);
                                   }}
                                 >
@@ -444,12 +446,13 @@ export function Models5() {
                                       className={`
                       flex-shrink-0 w-24
                       cursor-pointer
-                      border-2 ${selectedModel.id === models[i]?.id ? 'border-white' : 'border-gray-800'}
+                      border-2 ${selectedModel.id === models[i]?.id && cat === selectedCategory ? 'border-white' : 'border-gray-800'}
                       rounded-xl overflow-hidden relative group
                       transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-red-900/20
                     `}
                                       onClick={() => {
                                         setSelectedModel(models[i] || {});
+                                        setSelectedCategory(cat);
                                         setIsInfoOpen(false);
                                       }}
                                     >
