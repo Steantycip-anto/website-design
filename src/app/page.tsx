@@ -11,8 +11,8 @@ import * as Models3D from "@/components/models3d";
 import * as Projects from "@/components/projects";
 import * as Timelines from "@/components/timelines";
 import * as Globality from "@/components/globality";
-import * as Features from "@/components/features";
 import * as Footers from "@/components/footer";
+import * as Cookies from "@/components/cookies";
 
 const FIXED_SECTIONS = [
   {
@@ -41,6 +41,16 @@ const FIXED_SECTIONS = [
       "futuristic-interactive-footer": { name: "Futuristic Interactive Footer", component: Footers.FuturisticInteractiveFooter },
     },
     defaultActive: "futuristic-interactive-footer",
+  },
+  {
+    type: "cookie",
+    title: "Cookie",
+    components: {
+      "cookie1": { name: "Cookie 1", component: Cookies.CookieBanner1 },
+      "cookie2": { name: "Cookie 2", component: Cookies.CookieBanner2 },
+      "cookie3": { name: "Cookie 3", component: Cookies.CookieBanner3 },
+    },
+    defaultActive: "cookie3",
   },
 ]
 
@@ -160,7 +170,7 @@ export function CompletePage({site_sections = []}) {
   site_sections = [
     ...FIXED_SECTIONS.filter(section => section.type === "header"),
     ...site_sections,
-    ...FIXED_SECTIONS.filter(section => section.type === "footer"),
+    ...FIXED_SECTIONS.slice(FIXED_SECTIONS.findIndex(el => el.type === "footer"))
   ];
 
   // Inizializza lo stato per ogni tipo di sezione con il valore predefinito
